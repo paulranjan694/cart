@@ -8,6 +8,7 @@ class CartItem extends React.Component {
       title: 'Mobile Phone',
       qty: 1,
       img: '',
+      number:1
     };
 
     // binding incrementQuantity method when not using arrow function
@@ -20,7 +21,37 @@ class CartItem extends React.Component {
     // }
 
     incrementQuantity = ()=>{
-        console.log("this.state",this.state); 
+        // console.log("this.state",this.state); 
+
+        // setState will do shallow copy(means only update the particular date to the state)
+        // setstate form 1
+        // this.setState({
+        //     qty:this.state.qty+1,
+        // })
+
+        // setState form 2
+        this.setState((prevState)=>{
+            return {
+                qty:prevState.qty + 1,
+            }
+        });
+
+        this.setState({ number: 2 }, () => console.log(this.state.number));
+        this.setState({ number: 3 }, () => console.log(this.state.number));
+    }
+
+    decrementQuantity = ()=>{
+        const {qty}=this.state;
+
+        if(qty===0){
+            return;
+        }
+
+        this.setState((prevState)=>{
+            return {
+                qty : prevState.qty -1,
+            }
+        })
     }
 
 
@@ -48,6 +79,7 @@ class CartItem extends React.Component {
               alt="decrement"
               className="action-icons"
               src="https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1615585268~hmac=f63b3f56f9d3bb4b826bd5c625e54f69"
+              onClick={this.decrementQuantity}
             />
             <img
               alt="delete"
