@@ -13,21 +13,21 @@ class App extends React.Component {
           price: 99,
           title: 'Camera',
           qty: 10,
-          img: '',
+          img: 'https://images.unsplash.com/photo-1560367918-bed51f9dff43?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=811&q=80',
           id: 1,
         },
         {
           price: 500,
           title: 'Mobile',
-          qty: 15,
-          img: '',
+          qty: 5,
+          img: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80',
           id: 2,
         },
         {
           price: 999,
           title: 'Laptop',
-          qty: 5,
-          img: '',
+          qty: 3,
+          img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80',
           id: 3,
         },
       ],
@@ -82,6 +82,18 @@ class App extends React.Component {
     return count;
   }
 
+  getTotalPrice = ()=>{
+    const {products} = this.state;
+
+    let cartTotal=0;
+
+    products.forEach(product=>{
+      cartTotal+=(product.qty*product.price);
+    })
+
+    return cartTotal;
+  }
+
   render(){
     const {products} =this.state;
     return (
@@ -94,6 +106,7 @@ class App extends React.Component {
           onDecrementQty={this.decrementQtyHandler}
           onDeleteProduct={this.handleDeleteProduct}
         />
+        <div>Total : {this.getTotalPrice()}</div>
       </div>
     );
   }
